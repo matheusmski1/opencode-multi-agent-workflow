@@ -5,15 +5,15 @@ description: Multi-agent software development workflow for OpenCode. Routes work
 
 # Multi-Agent Workflow
 
-A skill-based development workflow that routes work to specialized subagents, each running on the cheapest model that can reliably do the job. Built for OpenCode with OpenRouter, but adaptable to any multi-agent environment.
+A skill-based development workflow that routes work to specialized subagents, each running on the cheapest model that can reliably do the job. Built for OpenCode with the OpenCode Zen provider (`opencode Go` plan), but adaptable to any provider or multi-agent environment.
 
 ## Prerequisites
 
 This skill assumes the following are already installed and configured:
 
-1. **OpenCode** with OpenRouter connected (`/connect` → OpenRouter)
+1. **OpenCode** with an OpenCode Zen provider connected (`/connect` → OpenCode Zen). The `opencode Go` plan gives flat-rate access to the open-model pool used below.
 2. **Subagents installed** via `scripts/setup.sh` (see README)
-3. **Skill library** — the workflow references skills from the `superpowers` skill collection (wayfinder, brainstorming, grill-with-docs, implement, tdd, code-review, etc.). Install them first or adapt the router to your own skills.
+3. **Skill library** — the router below references skills from **[mattpocock/skills](https://github.com/mattpocock/skills)** (wayfinder, to-spec, to-tickets, implement, tdd, code-review, diagnosing-bugs, triage, prototype, grill-with-docs, ask-matt, handoff). Install that collection first, or adapt the router to your own skills. `brainstorming` is the one row sourced from [obra/superpowers](https://github.com/obra/superpowers) and is optional.
 
 ## Workflow router
 
@@ -37,39 +37,52 @@ Route work to the skill that fits the situation. Load skills with the skill tool
 
 ## Multi-agent model routing
 
-When delegating to subagents, pick the cheapest model that can reliably do the job. Prices and rankings change — recheck the research note (`research/llm-coding-agents-cost-benefit.md`) before freezing long-term routing.
+All IDs below are OpenCode Zen (`opencode-go/<id>`) models in the `opencode Go` open-model pool, so the whole pipeline runs inside the flat-rate plan. On a flat plan the scarce resource is the **rate limit**, not per-token price — so route for **best cost-benefit per role**: spend capability where it decides the outcome (gates, debugging), stay cheap on volume (bulk + mechanical). Full rationale, cost basis, and escalation levers in **`docs/model-selection.md`**. Rankings change — reconfirm with `/models` before freezing.
 
-| Role | Primary model | Fallback | Rationale |
+| Role | Model | reasoningEffort | Why (CxB) |
 |---|---|---|---|
-| Controller / planner / brainstorming | `z-ai/glm-5.2` | `deepseek/deepseek-v4-pro` | Best price/performance + 1M context |
-| Implementer — complex tasks | `z-ai/glm-5.2` | `deepseek/deepseek-v4-pro` | Strongest open-model coding scores at low cost |
-| Implementer — mechanical tasks | `deepseek/deepseek-v4-flash` | `poolside/laguna-xs-2.1` | Cheapest models with 1M context |
-| Spec reviewer | `z-ai/glm-5.2` | `anthropic/claude-sonnet-5` | Strong reasoning for spec gaps; promote for high-stakes specs |
-| Code-quality reviewer | `anthropic/claude-sonnet-5` | `z-ai/glm-5.2` | Sharper for architecture/security critique |
-| Debug specialist | `anthropic/claude-sonnet-5` | `z-ai/glm-5.2` | Reasoning + large context for root-cause analysis |
-| High-volume / low-stakes | `deepseek/deepseek-v4-flash` | `poolside/laguna-xs-2.1` | Minimize spend on mechanical, throwaway work |
+| Controller / planner | `opencode-go/glm-5.2` | high | Best capability-per-dollar all-round open coder, 1M context |
+| Implementer — complex | `opencode-go/glm-5.2` | high | Highest-token role; GLM-5.2 wins CxB there |
+| Implementer — mechanical | `opencode-go/deepseek-v4-flash` | — | Cheapest capable; `-free` variant for throwaway work |
+| Debug specialist | `opencode-go/deepseek-v4-pro` | high | Pool's best hard-reasoner **and** cheap — standout CxB; different family |
+| Spec gate | `opencode-go/qwen3.7-plus` | high | Careful reading is cheap; different family |
+| Quality gate | `opencode-go/kimi-k2.7-code` | high | Highest-stakes, low-volume gate → coding-specialist, different family; escalate to `grok-4.5` / `claude-sonnet-5` for critical PRs |
 
 **Rules of thumb:**
-- Prefer GLM-5.2 for any reasoning-heavy role where context fits in 1M tokens.
-- Use DeepSeek V4 Pro as a cheaper alternative with the same 1M context.
-- Reserve Claude Sonnet 5 for review, debugging, or architecture when quality matters more than cost (watch intro-pricing expiration).
-- Start mechanical implementers on DeepSeek V4 Flash; promote to stronger models only if the task fails.
+- Four distinct model families across the pipeline, so every gate is a genuine second opinion — never a model grading its own output.
+- Gates and debugging run occasionally: paying for a stronger model there is cheap. Bulk implementation runs constantly: keep it lean.
+- `grok-4.5` is the strongest raw coder in the pool but the worst CxB — reserve it (or metered `claude-sonnet-5`) for the quality gate on critical changes, not routine work.
+- Raise `reasoningEffort` to `xhigh` for the hardest debug/review passes where the model supports it (DeepSeek V4 family, GLM-5.2).
 
 ## Subagents
 
-The following subagents are installed by `scripts/setup.sh` and live in `~/.config/opencode/agents/`. Invoke them by mentioning `@agent-name` in a message.
+The following subagents are installed by `scripts/setup.sh` and live in `~/.config/opencode-go/agents/`. Invoke them by mentioning `@agent-name` in a message.
 
 | Agent | Model | Use when |
 |---|---|---|
-| `@implementer-complex` | `openrouter/z-ai/glm-5.2` | Multi-file implementation, integration, debugging |
-| `@implementer-mechanical` | `openrouter/deepseek/deepseek-v4-flash` | Small isolated edits, boilerplate, formatting |
-| `@spec-reviewer` | `openrouter/z-ai/glm-5.2` | Check spec compliance |
-| `@code-quality-reviewer` | `openrouter/anthropic/claude-sonnet-5` | Deep architecture/security review |
-| `@debug-specialist` | `openrouter/anthropic/claude-sonnet-5` | Root-cause analysis |
+| `@implementer-complex` | `opencode-go/glm-5.2` | Multi-file implementation, integration |
+| `@implementer-mechanical` | `opencode-go/deepseek-v4-flash` | Small isolated edits, boilerplate, formatting |
+| `@spec-reviewer` | `opencode-go/qwen3.7-plus` | Spec-compliance gate (blocks until PASS) |
+| `@code-quality-reviewer` | `opencode-go/kimi-k2.7-code` | Code-quality gate (blocks until PASS) |
+| `@debug-specialist` | `opencode-go/deepseek-v4-pro` | Root-cause analysis |
 
 **Workflow order per ticket:** `@implementer-complex` → `@spec-reviewer` → `@code-quality-reviewer`. Only move forward after each agent reports approval. If the spec reviewer finds gaps, the implementer fixes them and the spec reviewer re-reviews. If the code-quality reviewer finds issues, the implementer fixes them and the code-quality reviewer re-reviews.
 
 **Never** dispatch two implementers in parallel on the same worktree — they will conflict. If tasks are independent and touch separate files, use `dispatching-parallel-agents` with isolated worktrees.
+
+## Enforcement — what actually blocks vs what is prose
+
+Two layers, by design. An LLM review cannot be *truly* hard-gated — the reviewer produces the verdict, so a PASS marker it writes for itself is theater against a misaligned agent. So the hard block lives where it is honest (the objective toolchain), and the LLM review stays prose.
+
+**Hard gate (deterministic, no plugin — native permission + husky):**
+- Commit is the controller's exclusive act. The implementer and debug subagents `deny` `git commit`/`git push` in their frontmatter; only the controller commits.
+- The controller cannot dodge the toolchain either: `--no-verify` and `git push --force`/`-f` are denied for it.
+- On the controller's commit, the target project's **husky** hooks run: `tsc --noEmit` + `eslint --max-warnings 0` (pre-commit, via lint-staged) and `commitlint` (commit-msg). Non-zero exit aborts the commit — the agent's work is gated by the same objective checks a human's is. Scaffold them into a repo with `scripts/setup-husky.sh`.
+
+**Prose gate (LLM, run by the controller before it commits):**
+- Spec gate (`@spec-reviewer`) then quality gate (`@code-quality-reviewer`), each delta-scoped to the pinned three-dot diff, each requiring `file:line` evidence, each returning PASS/FAIL. The controller commits only on PASS; on FAIL the implementer fixes and the gate re-reviews.
+- Quality review is a **single** reviewer. For a high-stakes diff (auth, payments, migrations, public API), get a second opinion from a different-family model and break the tie yourself — no automated jury (2-of-3 mid-tier models launder confidence and burn the rate-limit window without raising bug recall).
+- The debug specialist is capped at 3 failed fix attempts, then escalates to architecture review instead of thrashing.
 
 ## Code standards
 
