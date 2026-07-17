@@ -1,211 +1,202 @@
 <mxfile host="app.diagrams.net" agent="opencode" version="26.0.0">
   <diagram name="Multi-Agent Workflow" id="multi-agent-workflow">
-    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1240" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
         <!-- Title -->
-        <mxCell id="title" value="Multi-Agent Workflow — OpenCode Go" style="text;html=1;fontSize=18;fontStyle=1;align=center;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="250" y="10" width="500" height="30" as="geometry" />
+        <mxCell id="title" value="Multi-Agent Workflow — OpenCode (plano Go / Zen)" style="text;html=1;fontSize=20;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="270" y="18" width="700" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Provider opencode Zen · roteamento por custo-benefício · revisão em prosa + gate objetivo no husky (sem plugin custom)" style="text;html=1;fontSize=11;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="220" y="52" width="800" height="20" as="geometry" />
         </mxCell>
 
-        <!-- ===================== TOP: ENTRY ===================== -->
-
-        <!-- User -->
-        <mxCell id="user" value="Usuario&#xa;&quot;implementa feature X&quot;" style="shape=actor;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="60" y="50" width="60" height="70" as="geometry" />
+        <!-- Dividers -->
+        <mxCell id="div1" value="" style="line;html=1;strokeWidth=1;strokeColor=#bbbbbb;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="190" width="1180" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="div2" value="" style="line;html=1;strokeWidth=1;strokeColor=#bbbbbb;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="325" width="1180" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="div3" value="" style="line;html=1;strokeWidth=1;strokeColor=#bbbbbb;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="475" width="1180" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="div4" value="" style="line;html=1;strokeWidth=1;strokeColor=#bbbbbb;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="635" width="1180" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="div5" value="" style="line;html=1;strokeWidth=1;strokeColor=#bbbbbb;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="780" width="1180" height="1" as="geometry" />
         </mxCell>
 
-        <!-- Skill auto-load -->
-        <mxCell id="skill" value="SKILL.md (auto-carregada)&#xa;Router + Model Routing" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;align=center;" vertex="1" parent="1">
-          <mxGeometry x="230" y="55" width="220" height="60" as="geometry" />
+        <!-- Section labels -->
+        <mxCell id="plan_label" value="Planejamento — skills de mattpocock/skills" style="text;html=1;fontSize=13;fontStyle=1;align=left;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="440" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="exec_label" value="Execução (por ticket)" style="text;html=1;fontSize=13;fontStyle=1;align=left;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="335" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="gate_label" value="Gates de revisão (prosa)" style="text;html=1;fontSize=13;fontStyle=1;align=left;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="485" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="enf_label" value="Enforcement + Entrega" style="text;html=1;fontSize=13;fontStyle=1;align=left;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="642" width="300" height="24" as="geometry" />
         </mxCell>
 
-        <!-- Controller -->
-        <mxCell id="controller" value="Controller (build)&#xa;opencode-go/glm-5.2" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="560" y="55" width="220" height="60" as="geometry" />
-        </mxCell>
-
-        <!-- Arrows top -->
-        <mxCell id="e1" style="rounded=1;html=1;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="user" target="skill">
+        <!-- ============ EDGES (back layer) ============ -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;" edge="1" parent="1" source="user" target="skill">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e2" style="rounded=1;html=1;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="skill" target="controller">
+        <mxCell id="e1l" value="1. pede" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;" vertex="1" connectable="0" parent="e1">
+          <mxGeometry x="-0.1" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;" edge="1" parent="1" source="skill" target="controller">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- ===================== PLANNING (purple row) ===================== -->
-
-        <mxCell id="pl_label" value="Planejamento" style="text;html=1;fontSize=13;fontStyle=1;fillColor=none;strokeColor=#9673a6;fontColor=#9673a6;fontAlign=left;" vertex="1" parent="1">
-          <mxGeometry x="60" y="160" width="120" height="25" as="geometry" />
+        <mxCell id="e2l" value="2. auto-load" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;" vertex="1" connectable="0" parent="e2">
+          <mxGeometry x="-0.1" relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="wayfinder" value="wayfinder&#xa;Coisa grande/nebulosa" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry x="60" y="190" width="160" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="brainstorm" value="brainstorming&#xa;Ideia do zero" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry x="250" y="190" width="160" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="grill" value="grill-with-docs&#xa;Afiar plano + ADRs" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry x="440" y="190" width="160" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="tospec" value="to-spec → to-tickets&#xa;Multi-sessao" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry x="630" y="190" width="160" height="50" as="geometry" />
-        </mxCell>
-
-        <!-- Arrow controller -> planning (decision: escolhe) -->
-        <mxCell id="e3" style="rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="controller" target="brainstorm">
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="controller" target="brainstorm">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e3l" value="escolhe abordagem" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" vertex="1" connectable="0" parent="e3">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e3l" value="3. escolhe abordagem" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;" vertex="1" connectable="0" parent="e3">
+          <mxGeometry x="-0.2" relative="1" as="geometry" />
         </mxCell>
 
-        <!-- ===================== EXECUCAO (green row) ===================== -->
-
-        <mxCell id="ex_label" value="Execucao" style="text;html=1;fontSize=13;fontStyle=1;fillColor=none;strokeColor=#82b366;fontColor=#82b366;fontAlign=left;" vertex="1" parent="1">
-          <mxGeometry x="60" y="290" width="100" height="25" as="geometry" />
-        </mxCell>
-
-        <mxCell id="impl_complex" value="@implementer-complex&#xa;opencode-go/glm-5.2&#xa;&#xa;Implementa a task" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="320" width="220" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="impl_mech" value="@implementer-mechanical&#xa;opencode-go/deepseek-v4-flash&#xa;&#xa;Tasks pequenas" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="400" y="320" width="220" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="debug" value="@debug-specialist&#xa;opencode-go/deepseek-v4-pro&#xa;&#xa;Root-cause + fix" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="680" y="320" width="200" height="60" as="geometry" />
-        </mxCell>
-
-        <!-- Arrow planning -> impl (depois de planejar, executa) -->
-        <mxCell id="e4" style="rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;edgeStyle=orthogonalEdgeStyle;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="brainstorm" target="impl_complex">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <!-- ===================== REVISAO (blue row) ===================== -->
-
-        <mxCell id="rev_label" value="Revisao (gates)" style="text;html=1;fontSize=13;fontStyle=1;fillColor=none;strokeColor=#6c8ebf;fontColor=#6c8ebf;fontAlign=left;" vertex="1" parent="1">
-          <mxGeometry x="60" y="430" width="150" height="25" as="geometry" />
-        </mxCell>
-
-        <mxCell id="spec_rev" value="@spec-reviewer&#xa;opencode-go/qwen3.7-plus&#xa;&#xa;Spec OK?" style="rhombus;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="230" y="460" width="160" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="cq_rev" value="@code-quality-reviewer&#xa;opencode-go/kimi-k2.7-code&#xa;&#xa;Qualidade OK?" style="rhombus;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="480" y="460" width="170" height="70" as="geometry" />
-        </mxCell>
-
-        <!-- Arrows: impl -> spec -->
-        <mxCell id="e5" style="rounded=1;html=1;strokeWidth=2;strokeColor=#6c8ebf;edgeStyle=orthogonalEdgeStyle;exitX=0.7;exitY=1;entryX=0.4;entryY=0;" edge="1" parent="1" source="impl_complex" target="spec_rev">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e5l" value="terminou" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;" vertex="1" connectable="0" parent="e5">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <!-- spec -> cq (PASS) -->
-        <mxCell id="e6" style="rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="spec_rev" target="cq_rev">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e6l" value="PASS" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#82b366;fontStyle=1;" vertex="1" connectable="0" parent="e6">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <!-- spec FAIL -> iteration box -->
-        <mxCell id="e7" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;exitX=0;exitY=0.5;entryX=1;entryY=0.3;" edge="1" parent="1" source="spec_rev" target="iter_box">
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;strokeColor=#6c8ebf;" edge="1" parent="1" source="impl_complex" target="spec_gate">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="60" y="495" />
-              <mxPoint x="60" y="640" />
+              <mxPoint x="160" y="462" />
+              <mxPoint x="420" y="462" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e7l" value="FAIL" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e7">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e4l" value="4. terminou → revisão" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;" vertex="1" connectable="0" parent="e4">
+          <mxGeometry x="-0.1" relative="1" as="geometry" />
         </mxCell>
 
-        <!-- cq FAIL -> iteration box -->
-        <mxCell id="e8" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;exitX=1;exitY=0.5;entryX=1;entryY=0.7;" edge="1" parent="1" source="cq_rev" target="iter_box">
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;strokeColor=#6c8ebf;" edge="1" parent="1" source="spec_gate" target="quality_gate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5l" value="5. spec PASS" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;" vertex="1" connectable="0" parent="e5">
+          <mxGeometry x="-0.1" relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Consolidated FAIL loop: any gate FAIL -> implementer, routed in the far-left lane -->
+        <mxCell id="efail" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;strokeColor=#b85450;dashed=1;" edge="1" parent="1" source="spec_gate" target="impl_complex">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="890" y="495" />
-              <mxPoint x="890" y="660" />
+              <mxPoint x="24" y="564" />
+              <mxPoint x="24" y="413" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e8l" value="FAIL" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e8">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="efaill" value="❌ qualquer gate FAIL → implementer corrige e re-submete" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;whiteSpace=wrap;" vertex="1" connectable="0" parent="efail">
+          <mxGeometry x="-0.5" y="1" relative="1" as="geometry">
+            <mxPoint x="60" y="30" as="offset" />
+          </mxGeometry>
         </mxCell>
 
-        <!-- Iteration box (between revisao and commit, left side) -->
-        <mxCell id="iter_box" value="Iteracao de Correcao&#xa;&#xa;Implementer corrige os&#xa;pontos apontados pelo gate&#xa;e reenvia pra revisao" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="60" y="600" width="200" height="80" as="geometry" />
-        </mxCell>
-
-        <!-- Arrow iter_box -> back to impl_complex -->
-        <mxCell id="e_iter1" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;entryX=0;entryY=0.7;" edge="1" parent="1" source="iter_box" target="impl_complex">
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="quality_gate" target="commit_ctrl">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="160" y="350" />
-              <mxPoint x="160" y="362" />
-              <mxPoint x="120" y="362" />
+              <mxPoint x="760" y="676" />
+              <mxPoint x="155" y="676" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e_iter1l" value="corrige e reenvia" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e_iter1">
+        <mxCell id="e6l" value="6. gates PASS" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;" vertex="1" connectable="0" parent="e6">
+          <mxGeometry x="-0.6" relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;strokeColor=#d6b656;" edge="1" parent="1" source="commit_ctrl" target="husky">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <!-- ===================== COMMIT (hard gate, red) ===================== -->
-
-        <mxCell id="commit" value="Controller commita — HARD GATE&#xa;opencode-go/glm-5.2&#xa;&#xa;husky: tsc --noEmit + eslint + commitlint" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="280" y="590" width="320" height="70" as="geometry" />
-        </mxCell>
-
-        <!-- Arrow cq PASS -> commit -->
-        <mxCell id="e9" style="rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="cq_rev" target="commit">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e9l" value="PASS" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#82b366;fontStyle=1;" vertex="1" connectable="0" parent="e9">
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="husky" target="delivered">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <!-- ===================== END ===================== -->
-
-        <mxCell id="end" value="Fim — task entregue" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="340" y="710" width="200" height="40" as="geometry" />
+        <!-- ============ NODES (front layer) ============ -->
+        <!-- Band 1: entrada -->
+        <mxCell id="user" value="Usuário&#xa;&quot;implementa X&quot;" style="shape=actor;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="95" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="skill" value="SKILL.md (model-invoked)&#xa;Router + CxB + enforcement&#xa;&#xa;Escolhe a abordagem" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;align=center;" vertex="1" parent="1">
+          <mxGeometry x="250" y="100" width="280" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="controller" value="Controller (build) · opencode/glm-5.2&#xa;&#xa;Lê o router · dispatcha subagents&#xa;Único que pode commitar" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="630" y="100" width="310" height="72" as="geometry" />
         </mxCell>
 
-        <!-- Arrow commit -> end -->
-        <mxCell id="e10" style="rounded=1;html=1;strokeWidth=2;strokeColor=#82b366;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="commit" target="end">
-          <mxGeometry relative="1" as="geometry" />
+        <!-- Band 2: planejamento -->
+        <mxCell id="wayfinder" value="wayfinder&#xa;Grande e nebuloso&#xa;Mapa de investigação" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="50" y="240" width="200" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="brainstorm" value="brainstorming&#xa;Ideia do zero&#xa;Design doc + plano" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="290" y="240" width="200" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="grill" value="grill-with-docs&#xa;Afiar plano existente&#xa;ADRs + glossário" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="530" y="240" width="200" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="tospec" value="to-spec → to-tickets&#xa;Multi-sessão&#xa;Spec + tickets tracer-bullet" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="770" y="240" width="200" height="64" as="geometry" />
         </mxCell>
 
-        <!-- commit FAIL -> iteration box -->
-        <mxCell id="e11" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;exitX=0;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="commit" target="iter_box">
-          <mxGeometry relative="1" as="geometry" />
+        <!-- Band 3: execução -->
+        <mxCell id="impl_complex" value="@implementer-complex · glm-5.2&#xa;Multi-arquivo, integração&#xa;commit/push = deny" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="375" width="220" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="e11l" value="FAIL: husky rejeita" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e11">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="impl_mech" value="@implementer-mechanical&#xa;deepseek-v4-flash&#xa;Boilerplate · commit/push = deny" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="300" y="375" width="220" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="debug" value="@debug-specialist · deepseek-v4-pro&#xa;Root-cause · repro loop&#xa;cap 3 tentativas → escala" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="550" y="375" width="220" height="76" as="geometry" />
         </mxCell>
 
-        <!-- ===================== BADGES ===================== -->
+        <!-- Band 4: gates -->
+        <mxCell id="spec_gate" value="Spec gate · qwen3.7-plus&#xa;Cobre requisito? Scope creep?&#xa;PASS / FAIL" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="300" y="525" width="240" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="quality_gate" value="Quality gate · kimi-k2.7-code&#xa;Arquitetura/segurança · refute-first&#xa;PASS / FAIL" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="640" y="525" width="240" height="78" as="geometry" />
+        </mxCell>
 
-        <mxCell id="badge_title" value="4 familias distintas (2a opiniao real)" style="text;html=1;fontSize=11;fontStyle=1;align=center;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="60" y="770" width="300" height="25" as="geometry" />
+        <!-- Band 5: enforcement + entrega -->
+        <mxCell id="commit_ctrl" value="Controller commita&#xa;(implementers não podem)&#xa;sem --no-verify / --force" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="50" y="685" width="210" height="74" as="geometry" />
         </mxCell>
-        <mxCell id="b1" value="GLM-5.2&#xa;(controller + impl)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="60" y="800" width="120" height="30" as="geometry" />
+        <mxCell id="husky" value="husky — gate objetivo que TRAVA&#xa;pre-commit: tsc --noEmit + eslint&#xa;commit-msg: commitlint&#xa;FAIL = aborta o commit" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="685" width="300" height="74" as="geometry" />
         </mxCell>
-        <mxCell id="b2" value="DeepSeek V4&#xa;(mecanico + debug)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="200" y="800" width="120" height="30" as="geometry" />
+        <mxCell id="delivered" value="✅ commit / PR" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="697" width="180" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="b3" value="Qwen 3.7 Plus&#xa;(spec gate)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="340" y="800" width="120" height="30" as="geometry" />
+
+        <!-- ============ Legend + note ============ -->
+        <mxCell id="legend_title" value="Legenda" style="text;html=1;fontSize=12;fontStyle=1;align=left;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="792" width="100" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="b4" value="Kimi K2.7 Code&#xa;(quality gate)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="480" y="800" width="120" height="30" as="geometry" />
+        <mxCell id="leg1" value="Planejamento" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="40" y="820" width="110" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" value="Execução" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="160" y="820" width="110" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" value="Revisão (gate)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="280" y="820" width="110" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4" value="Debug" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="400" y="820" width="110" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5" value="Skill / husky / enforcement" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="520" y="820" width="170" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="Sem plugin custom: enforcement = permission deny nativo + husky.&#xa;Detalhes: docs/enforcement.md · docs/model-selection.md" style="text;html=1;fontSize=10;align=left;fillColor=none;strokeColor=none;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="740" y="795" width="470" height="48" as="geometry" />
         </mxCell>
 
       </root>
