@@ -112,31 +112,48 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <!-- spec FAIL -> back to impl (dashed red, left curve) -->
-        <mxCell id="e7" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="spec_rev" target="impl_complex">
+        <!-- spec FAIL -> iteration box -->
+        <mxCell id="e7" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;exitX=0;exitY=0.5;entryX=1;entryY=0.3;" edge="1" parent="1" source="spec_rev" target="iter_box">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="60" y="495" />
-              <mxPoint x="60" y="390" />
-              <mxPoint x="230" y="390" />
+              <mxPoint x="60" y="640" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e7l" value="FAIL: corrige" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e7">
+        <mxCell id="e7l" value="FAIL" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <!-- cq FAIL -> back to impl (dashed red, right curve) -->
-        <mxCell id="e8" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0.8;entryY=1;" edge="1" parent="1" source="cq_rev" target="impl_complex">
+        <!-- cq FAIL -> iteration box -->
+        <mxCell id="e8" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;exitX=1;exitY=0.5;entryX=1;entryY=0.7;" edge="1" parent="1" source="cq_rev" target="iter_box">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="890" y="495" />
-              <mxPoint x="890" y="390" />
-              <mxPoint x="296" y="390" />
+              <mxPoint x="890" y="660" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e8l" value="FAIL: corrige" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e8">
+        <mxCell id="e8l" value="FAIL" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Iteration box (between revisao and commit, left side) -->
+        <mxCell id="iter_box" value="Iteracao de Correcao&#xa;&#xa;Implementer corrige os&#xa;pontos apontados pelo gate&#xa;e reenvia pra revisao" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="600" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow iter_box -> back to impl_complex -->
+        <mxCell id="e_iter1" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;entryX=0;entryY=0.7;" edge="1" parent="1" source="iter_box" target="impl_complex">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="350" />
+              <mxPoint x="160" y="362" />
+              <mxPoint x="120" y="362" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_iter1l" value="corrige e reenvia" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e_iter1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
@@ -165,15 +182,9 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <!-- commit FAIL -> back to impl -->
-        <mxCell id="e11" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;entryX=0;entryY=1;" edge="1" parent="1" source="commit" target="impl_complex">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="30" y="625" />
-              <mxPoint x="30" y="395" />
-              <mxPoint x="120" y="395" />
-            </Array>
-          </mxGeometry>
+        <!-- commit FAIL -> iteration box -->
+        <mxCell id="e11" style="rounded=1;html=1;strokeWidth=2;strokeColor=#b85450;dashed=1;exitX=0;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="commit" target="iter_box">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e11l" value="FAIL: husky rejeita" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e11">
           <mxGeometry relative="1" as="geometry" />
