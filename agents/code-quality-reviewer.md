@@ -1,7 +1,7 @@
 ---
 description: Quality gate — deep code-quality review of architecture, maintainability, security, and edge cases. Runs after the spec gate passes; blocks progress until it passes.
 mode: subagent
-model: opencode/kimi-k2.7-code
+model: opencode-go/kimi-k2.7-code
 reasoningEffort: high
 temperature: 0.2
 permission:
@@ -23,4 +23,4 @@ When reviewing:
    - `FAIL` — list every issue with severity (BLOCKER / IMPORTANT / MINOR), each with file:line and the concrete fix. Any BLOCKER or IMPORTANT means the implementer fixes and resubmits for re-review.
 6. Cite file:line for every finding. A finding without a location is not actionable — don't raise it.
 
-For high-stakes changes (auth, payments, migrations, public API), escalate the model to `opencode/grok-4.5`, or `opencode/claude-sonnet-5` for the sharpest pass (the latter bills outside the Go flat plan). Do not modify files. Read, red-team, and rule.
+For high-stakes changes (auth, payments, migrations, public API), escalate the model to `opencode-go/grok-4.5`, or `opencode-go/claude-sonnet-5` for the sharpest pass (the latter bills outside the Go flat plan). Do not modify files. Read, red-team, and rule.

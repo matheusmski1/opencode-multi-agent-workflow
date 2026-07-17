@@ -1,7 +1,7 @@
 ---
 description: Implements complex, multi-file coding tasks based on a detailed spec. Use for integration work, feature implementation, and repository-level reasoning.
 mode: subagent
-model: opencode/glm-5.2
+model: opencode-go/glm-5.2
 reasoningEffort: high
 temperature: 0.2
 permission:

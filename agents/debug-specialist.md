@@ -1,7 +1,7 @@
 ---
 description: Investigates bugs and performs root-cause analysis. Use when something is broken and the cause is unclear.
 mode: subagent
-model: opencode/deepseek-v4-pro
+model: opencode-go/deepseek-v4-pro
 reasoningEffort: high
 temperature: 0.1
 permission:

@@ -37,16 +37,16 @@ Route work to the skill that fits the situation. Load skills with the skill tool
 
 ## Multi-agent model routing
 
-All IDs below are OpenCode Zen (`opencode/<id>`) models in the `opencode Go` open-model pool, so the whole pipeline runs inside the flat-rate plan. On a flat plan the scarce resource is the **rate limit**, not per-token price — so route for **best cost-benefit per role**: spend capability where it decides the outcome (gates, debugging), stay cheap on volume (bulk + mechanical). Full rationale, cost basis, and escalation levers in **`docs/model-selection.md`**. Rankings change — reconfirm with `/models` before freezing.
+All IDs below are OpenCode Zen (`opencode-go/<id>`) models in the `opencode Go` open-model pool, so the whole pipeline runs inside the flat-rate plan. On a flat plan the scarce resource is the **rate limit**, not per-token price — so route for **best cost-benefit per role**: spend capability where it decides the outcome (gates, debugging), stay cheap on volume (bulk + mechanical). Full rationale, cost basis, and escalation levers in **`docs/model-selection.md`**. Rankings change — reconfirm with `/models` before freezing.
 
 | Role | Model | reasoningEffort | Why (CxB) |
 |---|---|---|---|
-| Controller / planner | `opencode/glm-5.2` | high | Best capability-per-dollar all-round open coder, 1M context |
-| Implementer — complex | `opencode/glm-5.2` | high | Highest-token role; GLM-5.2 wins CxB there |
-| Implementer — mechanical | `opencode/deepseek-v4-flash` | — | Cheapest capable; `-free` variant for throwaway work |
-| Debug specialist | `opencode/deepseek-v4-pro` | high | Pool's best hard-reasoner **and** cheap — standout CxB; different family |
-| Spec gate | `opencode/qwen3.7-plus` | high | Careful reading is cheap; different family |
-| Quality gate | `opencode/kimi-k2.7-code` | high | Highest-stakes, low-volume gate → coding-specialist, different family; escalate to `grok-4.5` / `claude-sonnet-5` for critical PRs |
+| Controller / planner | `opencode-go/glm-5.2` | high | Best capability-per-dollar all-round open coder, 1M context |
+| Implementer — complex | `opencode-go/glm-5.2` | high | Highest-token role; GLM-5.2 wins CxB there |
+| Implementer — mechanical | `opencode-go/deepseek-v4-flash` | — | Cheapest capable; `-free` variant for throwaway work |
+| Debug specialist | `opencode-go/deepseek-v4-pro` | high | Pool's best hard-reasoner **and** cheap — standout CxB; different family |
+| Spec gate | `opencode-go/qwen3.7-plus` | high | Careful reading is cheap; different family |
+| Quality gate | `opencode-go/kimi-k2.7-code` | high | Highest-stakes, low-volume gate → coding-specialist, different family; escalate to `grok-4.5` / `claude-sonnet-5` for critical PRs |
 
 **Rules of thumb:**
 - Four distinct model families across the pipeline, so every gate is a genuine second opinion — never a model grading its own output.
@@ -56,15 +56,15 @@ All IDs below are OpenCode Zen (`opencode/<id>`) models in the `opencode Go` ope
 
 ## Subagents
 
-The following subagents are installed by `scripts/setup.sh` and live in `~/.config/opencode/agents/`. Invoke them by mentioning `@agent-name` in a message.
+The following subagents are installed by `scripts/setup.sh` and live in `~/.config/opencode-go/agents/`. Invoke them by mentioning `@agent-name` in a message.
 
 | Agent | Model | Use when |
 |---|---|---|
-| `@implementer-complex` | `opencode/glm-5.2` | Multi-file implementation, integration |
-| `@implementer-mechanical` | `opencode/deepseek-v4-flash` | Small isolated edits, boilerplate, formatting |
-| `@spec-reviewer` | `opencode/qwen3.7-plus` | Spec-compliance gate (blocks until PASS) |
-| `@code-quality-reviewer` | `opencode/kimi-k2.7-code` | Code-quality gate (blocks until PASS) |
-| `@debug-specialist` | `opencode/deepseek-v4-pro` | Root-cause analysis |
+| `@implementer-complex` | `opencode-go/glm-5.2` | Multi-file implementation, integration |
+| `@implementer-mechanical` | `opencode-go/deepseek-v4-flash` | Small isolated edits, boilerplate, formatting |
+| `@spec-reviewer` | `opencode-go/qwen3.7-plus` | Spec-compliance gate (blocks until PASS) |
+| `@code-quality-reviewer` | `opencode-go/kimi-k2.7-code` | Code-quality gate (blocks until PASS) |
+| `@debug-specialist` | `opencode-go/deepseek-v4-pro` | Root-cause analysis |
 
 **Workflow order per ticket:** `@implementer-complex` → `@spec-reviewer` → `@code-quality-reviewer`. Only move forward after each agent reports approval. If the spec reviewer finds gaps, the implementer fixes them and the spec reviewer re-reviews. If the code-quality reviewer finds issues, the implementer fixes them and the code-quality reviewer re-reviews.
 

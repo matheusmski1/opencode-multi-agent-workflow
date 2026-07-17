@@ -6,7 +6,7 @@
         <mxCell id="1" parent="0" />
 
         <!-- Title -->
-        <mxCell id="title" value="Multi-Agent Workflow — OpenCode + OpenRouter" style="text;html=1;fontSize=20;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="title" value="Multi-Agent Workflow — OpenCode Go (Zen)" style="text;html=1;fontSize=20;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="300" y="20" width="600" height="40" as="geometry" />
         </mxCell>
 
@@ -21,7 +21,7 @@
         </mxCell>
 
         <!-- Controller / build -->
-        <mxCell id="controller" value="Controller (build)&#xa;Modelo: GLM-5.2 (OpenRouter)&#xa;&#xa;Le o router da skill&#xa;Dispatcha subagents na ordem certa" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="controller" value="Controller (build)&#xa;Modelo: opencode-go/glm-5.2&#xa;&#xa;Le o router da skill&#xa;Dispatcha subagents na ordem certa" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="650" y="80" width="260" height="80" as="geometry" />
         </mxCell>
 
@@ -90,17 +90,17 @@
         </mxCell>
 
         <!-- Implementer Complex -->
-        <mxCell id="impl_complex" value="@implementer-complex&#xa;Modelo: GLM-5.2&#xa;&#xa;Implementa a task&#xa;Multi-arquivo, integracao" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="impl_complex" value="@implementer-complex&#xa;Modelo: opencode-go/glm-5.2&#xa;&#xa;Implementa a task&#xa;Multi-arquivo, integracao" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="80" y="400" width="200" height="70" as="geometry" />
         </mxCell>
 
         <!-- Implementer Mechanical -->
-        <mxCell id="impl_mech" value="@implementer-mechanical&#xa;Modelo: DeepSeek V4 Flash&#xa;&#xa;Tasks pequenas e isoladas&#xa;Boilerplate, lint, rename" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="impl_mech" value="@implementer-mechanical&#xa;Modelo: opencode-go/deepseek-v4-flash&#xa;&#xa;Tasks pequenas e isoladas&#xa;Boilerplate, lint, rename" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="330" y="400" width="200" height="70" as="geometry" />
         </mxCell>
 
         <!-- Debug Specialist -->
-        <mxCell id="debug" value="@debug-specialist&#xa;Modelo: Claude Sonnet 5&#xa;&#xa;Root-cause analysis&#xa;Loop de reproducao + fix" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="debug" value="@debug-specialist&#xa;Modelo: opencode-go/deepseek-v4-pro&#xa;&#xa;Root-cause analysis&#xa;Loop de reproducao + fix" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="580" y="400" width="200" height="70" as="geometry" />
         </mxCell>
 
@@ -115,12 +115,12 @@
         </mxCell>
 
         <!-- Spec Reviewer -->
-        <mxCell id="spec_rev" value="@spec-reviewer&#xa;Modelo: GLM-5.2&#xa;&#xa;Confere spec compliance&#xa;Faltou algo? Sobrou algo?" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="spec_rev" value="@spec-reviewer&#xa;Modelo: opencode-go/qwen3.7-plus&#xa;&#xa;Confere spec compliance&#xa;Faltou algo? Sobrou algo?" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="200" y="560" width="220" height="70" as="geometry" />
         </mxCell>
 
         <!-- Code Quality Reviewer -->
-        <mxCell id="cq_rev" value="@code-quality-reviewer&#xa;Modelo: Claude Sonnet 5&#xa;&#xa;Arquitetura, SOLID, seguranca&#xa;Veredito: aprovado ou issues" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="cq_rev" value="@code-quality-reviewer&#xa;Modelo: opencode-go/kimi-k2.7-code&#xa;&#xa;Arquitetura, SOLID, seguranca&#xa;Veredito: aprovado ou issues" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="500" y="560" width="220" height="70" as="geometry" />
         </mxCell>
 
@@ -154,7 +154,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e6l" value="❌ gap?&#xa;implementer corrige" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;" vertex="1" connectable="0" parent="e6">
+        <mxCell id="e6l" value="gap? implementer corrige" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;" vertex="1" connectable="0" parent="e6">
           <mxGeometry x="-0.1" relative="1" as="geometry" />
         </mxCell>
 
@@ -168,7 +168,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e7l" value="❌ issue?&#xa;implementer corrige" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;" vertex="1" connectable="0" parent="e7">
+        <mxCell id="e7l" value="issue? implementer corrige" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#b85450;" vertex="1" connectable="0" parent="e7">
           <mxGeometry x="-0.1" relative="1" as="geometry" />
         </mxCell>
 
@@ -183,7 +183,7 @@
         </mxCell>
 
         <!-- Done -->
-        <mxCell id="done" value="✅ Aprovado&#xa;&#xa;Controller retorna resultado&#xa;pronto pra commit / PR" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="done" value="Aprovado&#xa;&#xa;Controller retorna resultado&#xa;pronto pra commit / PR" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="350" y="680" width="260" height="60" as="geometry" />
         </mxCell>
 
@@ -191,7 +191,7 @@
         <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1" source="cq_rev" target="done">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e8l" value="6. tudo OK" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;" vertex="1" connectable="0" parent="e8">
+        <mxCell id="e8l" value="tudo OK" style="edgeLabel;html=1;align=center;verticalAlign=middle;fontSize=10;" vertex="1" connectable="0" parent="e8">
           <mxGeometry x="-0.1" relative="1" as="geometry" />
         </mxCell>
 
@@ -213,20 +213,23 @@
         </mxCell>
 
         <!-- Model badges section -->
-        <mxCell id="models_title" value="Modelos por papel (OpenRouter)" style="text;html=1;fontSize=12;fontStyle=1;align=center;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="80" y="770" width="300" height="25" as="geometry" />
+        <mxCell id="models_title" value="Modelos por papel (OpenCode Go — flat-rate)" style="text;html=1;fontSize=12;fontStyle=1;align=center;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="80" y="770" width="400" height="25" as="geometry" />
         </mxCell>
-        <mxCell id="mod1" value="Controller: GLM-5.2 ($0.42 / $1.32)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="80" y="800" width="180" height="25" as="geometry" />
+        <mxCell id="mod1" value="Controller: opencode-go/glm-5.2 (1M ctx, agentic 43.1)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="80" y="800" width="240" height="25" as="geometry" />
         </mxCell>
-        <mxCell id="mod2" value="Implementer mec.: DeepSeek V4 Flash ($0.077 / $0.154)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="270" y="800" width="220" height="25" as="geometry" />
+        <mxCell id="mod2" value="Mecanico: opencode-go/deepseek-v4-flash (cheapest)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="330" y="800" width="240" height="25" as="geometry" />
         </mxCell>
-        <mxCell id="mod3" value="Reviewers: Claude Sonnet 5 ($2 / $10 intro)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="500" y="800" width="220" height="25" as="geometry" />
+        <mxCell id="mod3" value="Debug: opencode-go/deepseek-v4-pro (SWE-bench 80.6)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="580" y="800" width="240" height="25" as="geometry" />
         </mxCell>
-        <mxCell id="mod4" value="Fallback: DeepSeek V4 Pro ($0.435 / $0.87)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="730" y="800" width="200" height="25" as="geometry" />
+        <mxCell id="mod4" value="Gates: qwen3.7-plus + kimi-k2.7-code (2a opiniao)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="835" width="280" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="mod5" value="4 familias distintas: GLM, DeepSeek, Qwen, Kimi" style="rounded=1;whiteSpace=wrap;html=1;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="370" y="835" width="250" height="25" as="geometry" />
         </mxCell>
 
       </root>

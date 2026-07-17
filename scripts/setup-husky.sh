@@ -22,17 +22,31 @@ if [ ! -f package.json ]; then
   exit 1
 fi
 
-# Detect package manager from the lockfile.
-if [ -f pnpm-lock.yaml ]; then PM="pnpm"; ADD="pnpm add -D"; DLX="pnpm exec"
-elif [ -f yarn.lock ]; then PM="yarn"; ADD="yarn add -D"; DLX="yarn"
-else PM="npm"; ADD="npm install -D"; DLX="npx"; fi
+# Detect package manager from the lockfile (use arrays for safe word-splitting).
+if [ -f pnpm-lock.yaml ]; then PM="pnpm"; ADD=(pnpm add -D); DLX=(pnpm exec)
+elif [ -f yarn.lock ]; then PM="yarn"; ADD=(yarn add -D); DLX=(yarn)
+else PM="npm"; ADD=(npm install -D); DLX=(npx); fi
 echo "Package manager: $PM"
 
 echo "1. Installing dev dependencies..."
-$ADD husky @commitlint/cli @commitlint/config-conventional lint-staged
+"${ADD[@]}" husky @commitlint/cli @commitlint/config-conventional lint-staged
 
 echo "2. Initializing husky..."
-$DLX husky init  # creates .husky/ and a pre-commit stub we overwrite below
+"${DLX[@]}" husky init  # creates .husky/ and a pre-commit stub we overwrite below
+
+echo "2b. Adding prepare script to package.json (so hooks reinstall on clone/CI)..."
+if ! node -e "process.exit(JSON.parse(require('fs').readFileSync('package.json','utf8')).scripts?.prepare ? 0 : 1)" 2>/dev/null; then
+  node -e "
+    const fs = require('fs');
+    const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+    pkg.scripts = pkg.scripts || {};
+    pkg.scripts.prepare = 'husky';
+    fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+  "
+  echo "   added prepare: husky"
+else
+  echo "   prepare script already exists — left as-is"
+fi
 
 echo "3. Writing commitlint config (conventional commits)..."
 if [ ! -f commitlint.config.js ] && [ ! -f .commitlintrc.js ] && [ ! -f .commitlintrc.json ]; then
@@ -59,12 +73,13 @@ fi
 echo "5. Writing hooks..."
 # pre-commit: project-wide tsc (only if a tsconfig exists, so a fresh repo can still
 # land its first tsconfig), then eslint on staged files via lint-staged.
+# Uses npx (works with npm/yarn/pnpm — npx respects local node_modules/.bin).
 cat > .husky/pre-commit <<'EOF'
 if [ -f tsconfig.json ]; then
   echo "· tsc --noEmit"
-  npx tsc --noEmit || exit 1
+  npx --no-install tsc --noEmit || exit 1
 fi
-npx lint-staged
+npx --no-install lint-staged
 EOF
 
 # commit-msg: enforce conventional-commit format.

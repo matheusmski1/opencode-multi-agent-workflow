@@ -1,7 +1,7 @@
 ---
 description: Performs small, isolated, mechanical coding tasks — boilerplate, formatting, lint fixes, renaming, minor edits. Use only when the spec is clear and the scope is tiny.
 mode: subagent
-model: opencode/deepseek-v4-flash
+model: opencode-go/deepseek-v4-flash
 temperature: 0.1
 permission:
   read: allow

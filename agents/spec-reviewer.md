@@ -1,7 +1,7 @@
 ---
 description: Quality gate — reviews implementation against the spec to confirm every requirement is met and nothing extra was added. Runs after an implementer completes; blocks progress until it passes.
 mode: subagent
-model: opencode/qwen3.7-plus
+model: opencode-go/qwen3.7-plus
 reasoningEffort: high
 temperature: 0.1
 permission:

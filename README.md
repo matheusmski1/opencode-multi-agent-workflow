@@ -6,7 +6,7 @@ Skill multi-agente para [OpenCode](https://opencode.ai) que roteia trabalho pra 
 
 ![Diagrama do workflow](docs/workflow.png)
 
-> Arquivo editável: [docs/workflow.drawio](docs/workflow.png) (abra em [app.diagrams.net](https://app.diagrams.net))
+> Arquivo editável: [docs/workflow.drawio](docs/workflow.drawio) (abra em [app.diagrams.net](https://app.diagrams.net))
 
 ## O que você ganha
 
@@ -22,9 +22,9 @@ Depois de rodar `setup.sh` e reiniciar o OpenCode, três camadas trabalham junto
 
 | Camada | O que faz | Como carrega |
 |---|---|---|
-| **Skill** (`SKILL.md`) | Diz pro controller o workflow: qual skill usar quando, tabela de model routing, ordem dos subagents, padrões de código, verify-don't-assume | OpenCode escaneia `~/.config/opencode/skills/` no startup e auto-carrega quando a description matcha com seu pedido (model-invoked) |
-| **Subagents** (`agents/*.md`) | 5 agentes especializados com seus próprios modelos e permissões, em `~/.config/opencode/agents/` | OpenCode carrega tudo no startup; invoca via `@agent-name` ou o controller dispatcha automaticamente seguindo a skill |
-| **Config** (`opencode.json`) | Seta o `build` (controller) pra `opencode/glm-5.2`, habilita permissão `task` pra poder dispatchar subagents, seta `small_model` pra `opencode/deepseek-v4-flash` | Carregado uma vez no startup |
+| **Skill** (`SKILL.md`) | Diz pro controller o workflow: qual skill usar quando, tabela de model routing, ordem dos subagents, padrões de código, verify-don't-assume | OpenCode escaneia `~/.config/opencode-go/skills/` no startup e auto-carrega quando a description matcha com seu pedido (model-invoked) |
+| **Subagents** (`agents/*.md`) | 5 agentes especializados com seus próprios modelos e permissões, em `~/.config/opencode-go/agents/` | OpenCode carrega tudo no startup; invoca via `@agent-name` ou o controller dispatcha automaticamente seguindo a skill |
+| **Config** (`opencode.json`) | Seta o `build` (controller) pra `opencode-go/glm-5.2`, habilita permissão `task` pra poder dispatchar subagents, seta `small_model` pra `opencode-go/deepseek-v4-flash` | Carregado uma vez no startup |
 
 **Fluxo:** você pede pro OpenCode implementar feature → a skill auto-carrega → o controller (GLM-5.2) lê o router → escolhe a abordagem (brainstorming, implement, etc.) → dispatcha os subagents na ordem certa (implementer → spec-reviewer → code-quality-reviewer) → cada subagent roda no seu modelo → resultado volta pra você.
 
@@ -48,10 +48,10 @@ chmod +x scripts/setup.sh
 Depois **reinicia o OpenCode** pra carregar tudo.
 
 O setup script:
-1. Checa pré-requisitos (python3, OpenCode, skills de superpowers)
-2. Copia `SKILL.md` pra `~/.config/opencode/skills/multi-agent-workflow/SKILL.md`
-3. Copia 5 templates de subagents pra `~/.config/opencode/agents/`
-4. Injeta model routing e config do agente `build` no `~/.config/opencode/opencode.json`
+1. Checa pré-requisitos (python3, OpenCode, skills do Matt Pocock)
+2. Copia `SKILL.md` pra `~/.config/opencode-go/skills/multi-agent-workflow/SKILL.md`
+3. Copia 5 templates de subagents pra `~/.config/opencode-go/agents/`
+4. Injeta model routing e config do agente `build` no `~/.config/opencode-go/opencode.json`
 
 ## Uso
 
@@ -95,12 +95,12 @@ Tudo no pool open-source do plano **opencode Go** (flat-rate), roteado por **cus
 
 | Papel | Modelo (opencode Zen) | Nota (CxB) |
 |---|---|---|
-| Controller / planner | `opencode/glm-5.2` | melhor capacidade/dólar all-round, 1M ctx |
-| Implementer complexo | `opencode/glm-5.2` | papel que mais gasta token → CxB importa mais aqui |
-| Implementer mecânico | `opencode/deepseek-v4-flash` | mais barato capaz; variante `-free` p/ throwaway |
-| Debug specialist | `opencode/deepseek-v4-pro` | melhor raciocínio duro do pool **e** barato — CxB destaque |
-| Spec gate | `opencode/qwen3.7-plus` | leitura cuidadosa é barata; família diferente |
-| Code-quality gate | `opencode/kimi-k2.7-code` | gate de maior aposta, baixo volume → coding-specialist; escala p/ `grok-4.5` / `claude-sonnet-5` em PR crítico |
+| Controller / planner | `opencode-go/glm-5.2` | melhor capacidade/dólar all-round, 1M ctx |
+| Implementer complexo | `opencode-go/glm-5.2` | papel que mais gasta token → CxB importa mais aqui |
+| Implementer mecânico | `opencode-go/deepseek-v4-flash` | mais barato capaz; variante `-free` p/ throwaway |
+| Debug specialist | `opencode-go/deepseek-v4-pro` | melhor raciocínio duro do pool **e** barato — CxB destaque |
+| Spec gate | `opencode-go/qwen3.7-plus` | leitura cuidadosa é barata; família diferente |
+| Code-quality gate | `opencode-go/kimi-k2.7-code` | gate de maior aposta, baixo volume → coding-specialist; escala p/ `grok-4.5` / `claude-sonnet-5` em PR crítico |
 
 ## Estrutura
 
@@ -108,11 +108,11 @@ Tudo no pool open-source do plano **opencode Go** (flat-rate), roteado por **cus
 opencode-multi-agent-workflow/
 ├── SKILL.md                                # router + model routing + subagents + princípios
 ├── agents/                                  # templates dos subagents
-│   ├── implementer-complex.md              # opencode/glm-5.2
-│   ├── implementer-mechanical.md           # opencode/deepseek-v4-flash
-│   ├── spec-reviewer.md                    # opencode/qwen3.7-plus (gate)
-│   ├── code-quality-reviewer.md            # opencode/kimi-k2.7-code (gate)
-│   └── debug-specialist.md                 # opencode/deepseek-v4-pro
+│   ├── implementer-complex.md              # opencode-go/glm-5.2
+│   ├── implementer-mechanical.md           # opencode-go/deepseek-v4-flash
+│   ├── spec-reviewer.md                    # opencode-go/qwen3.7-plus (gate)
+│   ├── code-quality-reviewer.md            # opencode-go/kimi-k2.7-code (gate)
+│   └── debug-specialist.md                 # opencode-go/deepseek-v4-pro
 ├── docs/
 │   ├── model-selection.md                  # análise de custo-benefício por papel
 │   ├── enforcement.md                      # ADR: por que permission deny + husky em vez de plugin

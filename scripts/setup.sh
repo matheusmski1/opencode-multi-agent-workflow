@@ -7,15 +7,15 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
 AGENTS_SRC="$REPO_DIR/agents"
-AGENTS_DEST="${HOME}/.config/opencode/agents"
+AGENTS_DEST="${HOME}/.config/opencode-go/agents"
 SKILL_SRC="$REPO_DIR/SKILL.md"
-SKILL_DEST="${HOME}/.config/opencode/skills/multi-agent-workflow"
-CONFIG_FILE="${HOME}/.config/opencode/opencode.json"
+SKILL_DEST="${HOME}/.config/opencode-go/skills/multi-agent-workflow"
+CONFIG_FILE="${HOME}/.config/opencode-go/opencode.json"
 
 # Model routing (OpenCode Zen — opencode Go open-model pool). Edit here to retune.
 # Reconfirm the current pool with `/models` in the OpenCode TUI before freezing.
-CONTROLLER_MODEL="opencode/glm-5.2"
-SMALL_MODEL="opencode/deepseek-v4-flash"
+CONTROLLER_MODEL="opencode-go/glm-5.2"
+SMALL_MODEL="opencode-go/deepseek-v4-flash"
 
 echo "=== Multi-Agent Workflow Setup ==="
 echo ""
@@ -33,7 +33,7 @@ fi
 # The router references skills from mattpocock/skills (wayfinder, to-spec, to-tickets,
 # implement, tdd, code-review, ...). OpenCode discovers skills under these dirs.
 SKILL_SEARCH_DIRS=(
-  "${HOME}/.config/opencode/skills"
+  "${HOME}/.config/opencode-go/skills"
   "${HOME}/.claude/skills"
   "${HOME}/.agents/skills"
 )
@@ -89,7 +89,7 @@ echo "   Injecting model routing and build agent config..."
 CONTROLLER_MODEL="$CONTROLLER_MODEL" SMALL_MODEL="$SMALL_MODEL" python3 << 'PYEOF'
 import json, sys, os
 
-config_path = os.path.expanduser("~/.config/opencode/opencode.json")
+config_path = os.path.expanduser("~/.config/opencode-go/opencode.json")
 controller = os.environ["CONTROLLER_MODEL"]
 small = os.environ["SMALL_MODEL"]
 
@@ -125,7 +125,8 @@ config["agent"]["build"]["permission"]["bash"] = {
     "*": "allow",
     "*--no-verify*": "deny",
     "git push --force*": "deny",
-    "git push -f *": "deny",
+    "git push -f*": "deny",
+    "git push -f": "deny",
 }
 
 with open(config_path, "w") as f:
@@ -139,9 +140,9 @@ echo ""
 echo "4. Setup complete."
 echo ""
 echo "   What was installed:"
-echo "   - Skill:        ~/.config/opencode/skills/multi-agent-workflow/SKILL.md"
-echo "   - Subagents:    ~/.config/opencode/agents/*.md (5 agents)"
-echo "   - Config:       ~/.config/opencode/opencode.json (model + build agent)"
+echo "   - Skill:        ~/.config/opencode-go/skills/multi-agent-workflow/SKILL.md"
+echo "   - Subagents:    ~/.config/opencode-go/agents/*.md (5 agents)"
+echo "   - Config:       ~/.config/opencode-go/opencode.json (model + build agent)"
 echo ""
 echo "   Next steps:"
 echo "   - Connect OpenCode Zen: /connect in OpenCode (subscribe to the Go plan for flat-rate open models)"

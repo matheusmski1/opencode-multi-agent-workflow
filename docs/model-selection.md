@@ -39,8 +39,8 @@ Four distinct model families across the pipeline, so every gate is a genuine sec
 
 ## Escalation levers (spend more only when stakes justify it)
 
-- **Quality gate on critical changes** (auth, payments, migrations, public API): switch the code-quality reviewer to `opencode/grok-4.5` (still inside Go) or `opencode/claude-sonnet-5` (sharpest, bills outside the flat plan).
-- **Complex spec review**: bump the spec gate to `opencode/qwen3.7-max`.
+- **Quality gate on critical changes** (auth, payments, migrations, public API): switch the code-quality reviewer to `opencode-go/grok-4.5` (still inside Go) or `opencode-go/claude-sonnet-5` (sharpest, bills outside the flat plan).
+- **Complex spec review**: bump the spec gate to `opencode-go/qwen3.7-max`.
 - **Deeper reasoning on any role**: raise `reasoningEffort` (`high` → `xhigh` where the model supports it: DeepSeek V4 family, GLM-5.2).
 
 ## Caveats
