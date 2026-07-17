@@ -2,19 +2,60 @@
 set -euo pipefail
 
 # Multi-Agent Workflow setup script
-# Installs subagents and injects config into opencode.json
+# Installs skill, subagents, and injects config into opencode.json
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
 AGENTS_SRC="$REPO_DIR/agents"
 AGENTS_DEST="${HOME}/.config/opencode/agents"
+SKILL_SRC="$REPO_DIR/SKILL.md"
+SKILL_DEST="${HOME}/.config/opencode/skills/multi-agent-workflow"
 CONFIG_FILE="${HOME}/.config/opencode/opencode.json"
 
 echo "=== Multi-Agent Workflow Setup ==="
 echo ""
 
-# 1. Copy agent templates
-echo "1. Installing subagents..."
+# 0. Prerequisites check
+echo "0. Checking prerequisites..."
+if ! command -v opencode &>/dev/null; then
+  echo "   WARNING: opencode not found in PATH. Make sure it's installed."
+fi
+if ! python3 -c "import json" 2>/dev/null; then
+  echo "   ERROR: python3 is required. Please install it."
+  exit 1
+fi
+
+SUPERPOWERS_PATHS=(
+  "${HOME}/.agents/skills/wayfinder/SKILL.md"
+  "${HOME}/.claude/skills/wayfinder/SKILL.md"
+  "${HOME}/.config/opencode/skills/wayfinder/SKILL.md"
+)
+SUPERPOWERS_FOUND=false
+for p in "${SUPERPOWERS_PATHS[@]}"; do
+  if [ -f "$p" ]; then
+    SUPERPOWERS_FOUND=true
+    echo "   Found superpowers skills at $(dirname "$p")"
+    break
+  fi
+done
+if [ "$SUPERPOWERS_FOUND" = false ]; then
+  echo "   WARNING: Superpowers skill collection not found."
+  echo "   The workflow router references skills like wayfinder, brainstorming,"
+  echo "   grill-with-docs, implement, tdd, code-review, etc."
+  echo "   Install them from https://github.com/obra/superpowers or adapt SKILL.md."
+  echo ""
+fi
+
+# 1. Install skill (SKILL.md)
+echo "1. Installing skill..."
+mkdir -p "$SKILL_DEST"
+cp "$SKILL_SRC" "$SKILL_DEST/SKILL.md"
+echo "   Installed SKILL.md to $SKILL_DEST"
+echo "   (model-invoked: OpenCode will auto-load it when the description matches)"
+echo ""
+
+# 2. Copy agent templates
+echo "2. Installing subagents..."
 mkdir -p "$AGENTS_DEST"
 for f in "$AGENTS_SRC"/*.md; do
   name=$(basename "$f")
@@ -24,14 +65,14 @@ done
 echo "   Installed to $AGENTS_DEST"
 echo ""
 
-# 2. Check for opencode.json
-echo "2. Configuring opencode.json..."
+# 3. Check for opencode.json
+echo "3. Configuring opencode.json..."
 if [ ! -f "$CONFIG_FILE" ]; then
   echo "   Creating $CONFIG_FILE"
   echo '{}' > "$CONFIG_FILE"
 fi
 
-# 3. Inject model + agent config using python3
+# 4. Inject model + agent config using python3
 echo "   Injecting model routing and build agent config..."
 python3 << 'PYEOF'
 import json, sys, os
@@ -64,10 +105,16 @@ print("   Done.")
 PYEOF
 
 echo ""
-echo "3. Setup complete."
+echo "4. Setup complete."
+echo ""
+echo "   What was installed:"
+echo "   - Skill:        ~/.config/opencode/skills/multi-agent-workflow/SKILL.md"
+echo "   - Subagents:    ~/.config/opencode/agents/*.md (5 agents)"
+echo "   - Config:       ~/.config/opencode/opencode.json (model + build agent)"
 echo ""
 echo "   Next steps:"
 echo "   - Make sure OpenRouter is connected: /connect in OpenCode"
 echo "   - Restart OpenCode for changes to take effect"
-echo "   - Invoke subagents with @agent-name in your messages"
+echo "   - The skill auto-loads when you ask to develop features or fix bugs"
+echo "   - Subagents are invoked via @agent-name or automatically by the controller"
 echo ""
